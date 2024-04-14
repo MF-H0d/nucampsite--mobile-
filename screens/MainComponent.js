@@ -20,7 +20,7 @@ const HomeNavigator = () => {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{ title: "Home" }}
+        options={({ route }) => ({ title: route.params })}
       />
     </Stack.Navigator>
   );
@@ -62,7 +62,7 @@ const Main = () => {
           options={{ title: "Home" }}
         />
         <Drawer.Screen
-          name="Directory"
+          name="DirectoryNav"
           component={DirectoryNavigator}
           options={{ title: "Directory" }}
         />
