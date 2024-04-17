@@ -6,15 +6,14 @@ export const fetchPromotions = createAsyncThunk(
   async () => {
     const response = await fetch(baseurl + "promotions");
     if (!response.ok) {
-      return Promise.reject("Unable to fetch, status: " + response.status);
+      return Promise.reject("Unable to Fetch, status: " + response.status);
     }
-    const data = await response.json();
-    return data;
   }
 );
 
 const promotionsSlice = createSlice({
   name: "promotions",
+  initialState: { isLoading: true, errMess: null, promotionsArray: [] },
   reducers: {},
   extraReducers: (builder) => {
     builder

@@ -15,6 +15,7 @@ export const fetchComments = createAsyncThunk(
 
 const commentsSlice = createSlice({
   name: "comments",
+  initialState: { isLoading: true, errMess: null, commentsArray: [] },
   reducers: {},
   extraReducers: (builder) => {
     builder

@@ -1,33 +1,7 @@
-import { createStackNavigator } from "@react-navigation/stack";
-import React, { useState } from "react";
-import { ScrollView } from "react-native-gesture-handler";
-import { Avatar, Card, ListItem, Text } from "react-native-elements";
-import { PARTNERS } from "../shared/partners";
-
-const AboutScreen = () => {
-  const [partners, setPartners] = useState(PARTNERS);
-
-  return (
-    <ScrollView>
-      <Mission />
-      <Card>
-        <Card.Title>Community partners</Card.Title>
-        <Card.Divider />
-        {PARTNERS.map((partner) => (
-          <ListItem key={partner.id}>
-            <Avatar rounded source={partner.image} />
-            <ListItem.Content>
-              <ListItem.Title style={{ fontWeight: "bold" }}>
-                {partner.name}
-              </ListItem.Title>
-              <ListItem.Subtitle>{partner.description}</ListItem.Subtitle>
-            </ListItem.Content>
-          </ListItem>
-        ))}
-      </Card>
-    </ScrollView>
-  );
-};
+import { useSelector } from "react-redux";
+import { ScrollView, Text } from "react-native";
+import { Avatar, Card, ListItem } from "react-native-elements";
+import { baseurl } from "../shared/baseURL";
 
 const Mission = () => {
   return (
@@ -47,6 +21,31 @@ const Mission = () => {
           our standards. We also present a platform for campers to share reviews
           on campsites they have visited with each other.
         </Text>
+      </Card>
+    </ScrollView>
+  );
+};
+
+const AboutScreen = () => {
+  const partners = useSelector((state) => state.partners);
+
+  return (
+    <ScrollView>
+      <Mission />
+      <Card>
+        <Card.Title>Community partners</Card.Title>
+        <Card.Divider />
+        {partners.partnersArray.map((partner) => (
+          <ListItem key={partner.id}>
+            <Avatar rounded source={{ uri: baseurl + partner.image }} />
+            <ListItem.Content>
+              <ListItem.Title style={{ fontWeight: "bold" }}>
+                {partner.name}
+              </ListItem.Title>
+              <ListItem.Subtitle>{partner.description}</ListItem.Subtitle>
+            </ListItem.Content>
+          </ListItem>
+        ))}
       </Card>
     </ScrollView>
   );
