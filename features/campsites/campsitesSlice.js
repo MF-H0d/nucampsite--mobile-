@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { baseurl } from "../../shared/baseURL";
+import { baseurl } from "../../shared/baseURL.js";
 
 export const fetchCampsites = createAsyncThunk(
   "campsites/fetchCampsites",
