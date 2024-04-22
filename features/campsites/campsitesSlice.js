@@ -1,11 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { baseurl } from "../../shared/baseURL.js";
+import { baseUrl } from "../../shared/baseUrl";
 
 export const fetchCampsites = createAsyncThunk(
   "campsites/fetchCampsites",
   async () => {
-    const response = await fetch(baseurl + "campsites");
-    console.log(response);
+    const response = await fetch(baseUrl + "campsites");
     if (!response.ok) {
       return Promise.reject("Unable to fetch, status: " + response.status);
     }
@@ -30,7 +29,7 @@ const campsitesSlice = createSlice({
       })
       .addCase(fetchCampsites.rejected, (state, action) => {
         state.isLoading = false;
-        state.errMess = action.error ? action.error.message : "Fetch Failed";
+        state.errMess = action.error ? action.error.message : "Fetch failed";
       });
   },
 });

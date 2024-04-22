@@ -1,14 +1,14 @@
 import { ScrollView, Text, View } from "react-native";
 import { Card } from "react-native-elements";
 import { useSelector } from "react-redux";
-import { baseurl } from "../shared/baseURL";
-import LoadingComponent from "../components/LoadingComponent";
+import { baseUrl } from "../shared/baseUrl";
+import Loading from "../components/LoadingComponent";
 
 const FeaturedItem = (props) => {
   const { item } = props;
 
   if (props.isLoading) {
-    return <LoadingComponent />;
+    return <Loading />;
   }
   if (props.errMess) {
     return (
@@ -20,9 +20,15 @@ const FeaturedItem = (props) => {
   if (item) {
     return (
       <Card containerStyle={{ padding: 0 }}>
-        <Card.Image source={{ uri: baseurl + item.image }}>
+        <Card.Image source={{ uri: baseUrl + item.image }}>
           <View style={{ justifyContent: "center", flex: 1 }}>
-            <Text style={{ color: "white", textAlign: "center", fontSize: 20 }}>
+            <Text
+              style={{
+                color: "white",
+                textAlign: "center",
+                fontSize: 20,
+              }}
+            >
               {item.name}
             </Text>
           </View>
@@ -38,29 +44,19 @@ const HomeScreen = () => {
   const campsites = useSelector((state) => state.campsites);
   const promotions = useSelector((state) => state.promotions);
   const partners = useSelector((state) => state.partners);
-  /**
-   * Retrieves the campsites from the state.
-   * @param {Object} state - The state object.
-   * @returns {Array} - An array of campsites.
-   */
 
   const featCampsite = campsites.campsitesArray.find((item) => item.featured);
   const featPromotion = promotions.promotionsArray.find(
     (item) => item.featured
   );
   const featPartner = partners.partnersArray.find((item) => item.featured);
-  /**
-   * Finds the featured campsite from the campsites array.
-   * @param {Array} campsitesArray - The array of campsites.
-   * @returns {Object} - The featured campsite object.
-   */
 
   return (
     <ScrollView>
       <FeaturedItem
         item={featCampsite}
         isLoading={campsites.isLoading}
-        ErrMess={campsites.errMess}
+        errMess={campsites.errMess}
       />
       <FeaturedItem
         item={featPromotion}

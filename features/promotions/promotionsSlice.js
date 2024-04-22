@@ -1,13 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { baseurl } from "../../shared/baseURL";
+import { baseUrl } from "../../shared/baseUrl";
 
 export const fetchPromotions = createAsyncThunk(
   "promotions/fetchPromotions",
   async () => {
-    const response = await fetch(baseurl + "promotions");
+    const response = await fetch(baseUrl + "promotions");
     if (!response.ok) {
-      return Promise.reject("Unable to Fetch, status: " + response.status);
+      return Promise.reject("Unable to fetch, status: " + response.status);
     }
+    const data = await response.json();
+    return data;
   }
 );
 
@@ -27,7 +29,7 @@ const promotionsSlice = createSlice({
       })
       .addCase(fetchPromotions.rejected, (state, action) => {
         state.isLoading = false;
-        state.errMess = action.error ? action.error.message : "Fetch Failed";
+        state.errMess = action.error ? action.error.message : "Fetch failed";
       });
   },
 });

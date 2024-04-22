@@ -6,7 +6,7 @@ const favoritesSlice = createSlice({
   reducers: {
     toggleFavorite: (favorites, action) => {
       if (favorites.includes(action.payload)) {
-        return favorites.filter((favorite) => favorite != action.payload);
+        return favorites.filter((favorite) => favorite !== action.payload);
       } else {
         favorites.push(action.payload);
       }

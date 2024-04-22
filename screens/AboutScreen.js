@@ -1,31 +1,26 @@
-import { useSelector } from "react-redux";
 import { ScrollView, Text } from "react-native";
 import { Avatar, Card, ListItem } from "react-native-elements";
-import { baseurl } from "../shared/baseURL";
-import LoadingComponent from "../components/LoadingComponent";
+import { useSelector } from "react-redux";
+import { baseUrl } from "../shared/baseUrl";
+import Loading from "../components/LoadingComponent";
 
-const Mission = () => {
+function Mission() {
   return (
-    <ScrollView>
-      <Card>
-        <Card.Title style={{ fontWeight: "bold" }}>Our Mission</Card.Title>
-        <Card.Divider />
-        <Text style={{ margin: 10 }}>
-          We present a curated database of the best campsites in the vast woods
-          and back-country of the
-          <Text style={{ color: "green", fontWeight: "bold", fontSize: 16 }}>
-            World Wide Web Wilderness
-          </Text>
-          . We increase access to adventure for the public while promoting safe
-          and respectful use of resources. The expert wilderness trekkers on our
-          staff personally verify each campsite to make sure that they are up to
-          our standards. We also present a platform for campers to share reviews
-          on campsites they have visited with each other.
-        </Text>
-      </Card>
-    </ScrollView>
+    <Card>
+      <Card.Title>Our Mission</Card.Title>
+      <Card.Divider />
+      <Text style={{ margin: 10 }}>
+        We present a curated database of the best campsites in the vast woods
+        and backcountry of the World Wide Web Wilderness. We increase access to
+        adventure for the public while promoting safe and respectful use of
+        resources. The expert wilderness trekkers on our staff personally verify
+        each campsite to make sure that they are up to our standards. We also
+        present a platform for campers to share reviews on campsites they have
+        visited with each other.
+      </Text>
+    </Card>
   );
-};
+}
 
 const AboutScreen = () => {
   const partners = useSelector((state) => state.partners);
@@ -35,50 +30,36 @@ const AboutScreen = () => {
       <ScrollView>
         <Mission />
         <Card>
-          <Card.Title>Community partners</Card.Title>
+          <Card.Title>Community Partners</Card.Title>
           <Card.Divider />
-          {partners.partnersArray.map((partner) => (
-            <ListItem key={partner.id}>
-              <Avatar rounded source={{ uri: baseurl + partner.image }} />
-              <ListItem.Content>
-                <ListItem.Title style={{ fontWeight: "bold" }}>
-                  {partner.name}
-                </ListItem.Title>
-                <ListItem.Subtitle>{partner.description}</ListItem.Subtitle>
-              </ListItem.Content>
-            </ListItem>
-          ))}
+          <Loading />
         </Card>
       </ScrollView>
     );
   }
-
   if (partners.errMess) {
     return (
       <ScrollView>
         <Mission />
         <Card>
-          <Card.Title>Community partners</Card.Title>
+          <Card.Title>Community Partners</Card.Title>
           <Card.Divider />
           <Text>{partners.errMess}</Text>
         </Card>
       </ScrollView>
     );
   }
-
   return (
     <ScrollView>
       <Mission />
       <Card>
-        <Card.Title>Community partners</Card.Title>
+        <Card.Title>Community Partners</Card.Title>
         <Card.Divider />
         {partners.partnersArray.map((partner) => (
           <ListItem key={partner.id}>
-            <Avatar rounded source={{ uri: baseurl + partner.image }} />
+            <Avatar rounded source={{ uri: baseUrl + partner.image }} />
             <ListItem.Content>
-              <ListItem.Title style={{ fontWeight: "bold" }}>
-                {partner.name}
-              </ListItem.Title>
+              <ListItem.Title>{partner.name}</ListItem.Title>
               <ListItem.Subtitle>{partner.description}</ListItem.Subtitle>
             </ListItem.Content>
           </ListItem>

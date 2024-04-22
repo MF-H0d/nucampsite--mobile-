@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { baseurl } from "../../shared/baseURL";
+import { baseUrl } from "../../shared/baseUrl";
 
 export const fetchPartners = createAsyncThunk(
   "partners/fetchPartners",
   async () => {
-    const response = await fetch(baseurl + "partners");
+    const response = await fetch(baseUrl + "partners");
     if (!response.ok) {
-      return Promise.reject("Unable to Fetch, status: " + response.status);
+      return Promise.reject("Unable to fetch, status: " + response.status);
     }
     const data = await response.json();
     return data;
@@ -29,7 +29,7 @@ const partnersSlice = createSlice({
       })
       .addCase(fetchPartners.rejected, (state, action) => {
         state.isLoading = false;
-        state.errMess = action.error ? action.error.message : "Fetch Failed";
+        state.errMess = action.error ? action.error.message : "Fetch failed";
       });
   },
 });
