@@ -12,7 +12,7 @@ import HomeScreen from "./HomeScreen";
 import AboutScreen from "./AboutScreen";
 import ContactScreen from "./ContactScreen";
 import ReservationScreen from "./ReservationScreen";
-import { FavoritesScreen } from "./FavoritesScreen";
+import FavoritesScreen from "./FavoritesScreen";
 import { Icon } from "react-native-elements";
 import logo from "../assets/images/logo.png";
 import { useDispatch } from "react-redux";
