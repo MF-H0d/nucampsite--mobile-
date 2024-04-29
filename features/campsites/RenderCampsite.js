@@ -1,5 +1,12 @@
 import { useRef } from "react";
-import { StyleSheet, Text, View, Alert, PanResponder } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Alert,
+  PanResponder,
+  Share,
+} from "react-native";
 import { Card, Icon } from "react-native-elements";
 import * as Animatable from "react-native-animatable";
 import { baseUrl } from "../../shared/baseUrl";
@@ -10,6 +17,7 @@ const RenderCampsite = (props) => {
   const view = useRef();
   const isLeftSwipe = ({ dx }) => dx < -200;
   const isRightSwipe = ({ dx }) => dx > 200;
+  const isUpSwipe = ({ dy }) => dy < -200;
 
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
@@ -43,11 +51,30 @@ const RenderCampsite = (props) => {
           ],
           { cancelable: false }
         );
-      } else if (isRightSwipe(gestureState)) {
+      } else if (isUpSwipe(gestureState)) {
         props.onShowModal();
+      } else if (isRightSwipe(gestureState)) {
+        shareCampsite(
+          campsite.name,
+          campsite.description,
+          baseUrl + campsite.image
+        );
       }
     },
   });
+
+  const shareCampsite = (title, message, url) => {
+    Share.share(
+      {
+        title,
+        message: `${title}: ${message} ${url}`,
+        url,
+      },
+      {
+        dialogTitle: "Share" + title,
+      }
+    );
+  };
 
   if (campsite) {
     return (
@@ -85,6 +112,20 @@ const RenderCampsite = (props) => {
               raised
               reverse
               onPress={() => props.onShowModal()}
+            />
+            <Icon
+              name="share"
+              type="font-awesome"
+              color="#5637DD"
+              raised
+              reverse
+              onPress={() =>
+                shareCampsite(
+                  campsite.name,
+                  campsite.description,
+                  baseUrl + campsite.image
+                )
+              }
             />
           </View>
         </Card>
