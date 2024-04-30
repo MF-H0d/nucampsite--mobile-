@@ -40,7 +40,7 @@ const LoginTab = ({ navigation }) => {
   }, []);
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <Input
         placeholder="Username"
         leftIcon={{ type: "font-awesome", name: "user-o" }}
@@ -83,7 +83,7 @@ const LoginTab = ({ navigation }) => {
       <View style={styles.formButton}>
         <Button
           title="Register"
-          titleStyle={{ color: "blue" }}
+          titleStyle={{ color: "white" }}
           onPress={() => navigation.navigate("Register")}
           type="clear"
           buttonStyle={{ backgroundColor: "#5637DD" }}
@@ -91,13 +91,13 @@ const LoginTab = ({ navigation }) => {
             <Icon
               name="user-plus"
               type="font-awesome"
-              color="blue"
+              color="white"
               iconStyle={{ marginRight: 10 }}
             />
           }
         />
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
@@ -116,7 +116,7 @@ const LoginScreen = () => {
     labelStyle: { fontSize: 16 },
   };
   return (
-    <Tab.Navigator tabBarOptions={tabBarOptions}>
+    <Tab.Navigator screenOptions={tabBarOptions}>
       <Tab.Screen
         name="Login"
         component={LoginTab}
